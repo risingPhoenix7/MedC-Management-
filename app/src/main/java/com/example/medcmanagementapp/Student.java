@@ -4,9 +4,9 @@ public class Student {
     private String name;
     private int bitsID;
     private String mailID;
-    private int number;
+    private String number;
 
-    Student(String name, int bitsID, String mailID, int number) {
+    Student(String name, int bitsID, String mailID, String number) {
         this.name = name;
         this.bitsID = bitsID;
         this.mailID = mailID;
@@ -25,7 +25,7 @@ public class Student {
         this.mailID = mailID;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -41,7 +41,7 @@ public class Student {
         return mailID;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 }

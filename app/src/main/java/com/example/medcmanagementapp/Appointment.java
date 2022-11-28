@@ -5,25 +5,59 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import java.time.LocalDateTime;
-class Appointment
-{
-    private String bitsID;
-    private String doctorID;
+import java.util.UUID;
+
+class Appointment {
+
+
+    private final UUID appointmentID;
+    private final String bitsID;
+    private final UUID doctorID;
     private final LocalDateTime timestamp;
-    private LocalDateTime appointmentDate;
-    private LocalDateTime appointmentTime;
+    private boolean isCompleted;
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public String getBitsID() {
+        return bitsID;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    Appointment() { this.timestamp = LocalDateTime.now(); }
-    void setBitsID(String bitsID) { this.bitsID = bitsID; }
-    void setDoctorID(String doctorID) { this.doctorID = doctorID; }
-    void setAppointmentDate(LocalDateTime d) { appointmentDate = d; }
-    void setAppointmentTime(LocalDateTime d) { appointmentTime = d; }
-    String getBITS_ID() { return bitsID; }
-    String getDoctor_ID() { return doctorID; }
-    LocalDateTime getTimestamp() { return timestamp; }
-    LocalDateTime getAppointmentDate() { return appointmentDate; }
-    LocalDateTime getAppointmentTime() { return appointmentTime; }
+    public String getTimeStamp() {
+        return timestamp.getDayOfMonth() + "th " + timestamp.getMonth() + "\n" + timestamp.getHour() + ":" + timestamp.getMinute();
+    }
+
+    public String getAppointmentID() {
+        return appointmentID.toString();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getStatus() {
+        if (timestamp.compareTo(LocalDateTime.now()) > 0) {
+            return "PENDING";
+        } else if (isCompleted) {
+            return "COMPLETED";
+        } else {
+            return "WAITING";
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setCompleted() {
+        if (timestamp.compareTo(LocalDateTime.now()) < 0) {
+            isCompleted = true;
+        }
+    }
+
+    public Appointment(String bitsID, UUID doctorID, LocalDateTime timestamp) {
+        this.appointmentID = UUID.randomUUID();
+        this.bitsID = bitsID;
+        this.doctorID = doctorID;
+        this.timestamp = timestamp;
+        this.isCompleted = false;
+    }
 
 }
     

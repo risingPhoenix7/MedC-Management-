@@ -1,7 +1,9 @@
 package com.example.medcmanagementapp;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +12,7 @@ public class SignUpPage extends AppCompatActivity {
     EditText idEditText;
     EditText emailEditText;
     EditText PhoneEditText;
+    Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +22,19 @@ public class SignUpPage extends AppCompatActivity {
         idEditText = findViewById(R.id.editTextTextPersonName2);
         emailEditText = findViewById(R.id.editTextTextPersonName3);
         PhoneEditText = findViewById(R.id.editTextTextPersonName4);
+        submitButton = findViewById(R.id.button);
+        submitButton.setOnClickListener(view -> {
+            try {
+                if (!nameEditText.getText().toString().isEmpty() && !idEditText.getText().toString().isEmpty() && !emailEditText.getText().toString().isEmpty() && !PhoneEditText.getText().toString().isEmpty()) {
+                    DataClass.userList.add(new Student(nameEditText.getText().toString(), Integer.parseInt(idEditText.getText().toString()), emailEditText.getText().toString(), PhoneEditText.getText().toString()));
+                    Toast toast = Toast.makeText(getApplicationContext(), "Successfully added user. Please login", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                Toast toast = Toast.makeText(getApplicationContext(), "Could not add user", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 }
