@@ -3,8 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_main.xml" value="0.2210144927536232" />
-        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_student_page.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.15078125" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_add_doctors.xml" value="0.264" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_add_medicines.xml" value="0.264" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_admin_page.xml" value="0.4" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_doctors_list_view.xml" value="0.264" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_edit_doctors.xml" value="0.2" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_edit_medicine.xml" value="0.4" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_edit_medicines.xml" value="0.25" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_sign_in_page.xml" value="0.536" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_sign_up_page.xml" value="0.4" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_single_doctor_view.xml" value="0.4" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_single_inventory_view.xml" value="0.536" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_student_page.xml" value="0.4" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_view_inventory.xml" value="0.25" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/content_scrolling.xml" value="0.4" />
       </map>
     </option>
   </component>
