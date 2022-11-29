@@ -1,5 +1,6 @@
 package com.example.medcmanagementapp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,15 +15,17 @@ import java.util.UUID;
 public class AppointmentListActivity extends AppCompatActivity {
     ActivityAppointmentListBinding binding;
     AppointmentListAdapter listAdapter;
+    String studentid;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DataClass.appointmentList.add(new Appointment("f2020", UUID.randomUUID(), LocalDateTime.now()));
         binding = ActivityAppointmentListBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        listAdapter = new AppointmentListAdapter(AppointmentListActivity.this, DataClass.appointmentList);
+        Intent thisIndent = this.getIntent();
+        studentid = thisIndent.getStringExtra("Studentid");
+        listAdapter = new AppointmentListAdapter(AppointmentListActivity.this, studentid == null ? DataClass.appointmentList : DataClass.getAppointmentList(studentid), studentid == null);
         binding.viewAppointmentList.setAdapter(listAdapter);
     }
 

@@ -1,32 +1,44 @@
 package com.example.medcmanagementapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentAfterSignupActivity extends AppCompatActivity {
-    int studentid;
+    String studentid = "0";
     TextView name;
+    Button viewAppointments;
+    Button createAppointments;
+    Button buyMedicines;
+    Button seePurchases;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_after_signup);
         Intent intent = this.getIntent();
         try {
-//            System.out.println("fjnfjnfnjf");
-//            System.out.println(intent.getExtras().get("studentid"));
-//            studentid=intent.getExtras().get("studentid").toString();
-//            studentid = (intent.getStringExtra("studentid"));
-            studentid = intent.getIntExtra("studentid", 0);
+            studentid = intent.getExtras().get("studentid").toString();
+            System.out.println(studentid);
         } catch (Exception e) {
-            studentid = 0;
+            studentid = "5487";
         }
         name = findViewById(R.id.textView23);
-        System.out.println(studentid);
-        System.out.println("HUHUH");
-        name.setText(Integer.toString(studentid));
+        viewAppointments = findViewById(R.id.button11);
+        createAppointments = findViewById(R.id.button12);
+        buyMedicines = findViewById(R.id.button13);
+        seePurchases = findViewById(R.id.button14);
+
+        viewAppointments.setOnClickListener(view -> {
+            Intent appointmentIntent = new Intent(StudentAfterSignupActivity.this, AppointmentListActivity.class);
+            appointmentIntent.putExtra("Studentid", studentid);
+            startActivity(appointmentIntent);
+        });
+        name.setText(studentid);
     }
 }

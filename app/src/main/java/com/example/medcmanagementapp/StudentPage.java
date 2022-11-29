@@ -28,10 +28,10 @@ public class StudentPage extends AppCompatActivity {
             try {
                 if (DataClass.checkIfStudentExists(Integer.parseInt(userId.getText().toString()))) {
                     Intent launchActivity = new Intent(StudentPage.this, StudentAfterSignupActivity.class);
+                    String a = (userId.getText().toString());
+                    launchActivity.putExtra("studentid", a);
                     startActivity(launchActivity);
-//                    System.out.println("HUHUHUHUY");
-//                    System.out.println(userId.getText());
-                    launchActivity.putExtra("studentid", Integer.parseInt(userId.getText().toString()));
+
                 }
             } catch (Exception e) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Check your details again", Toast.LENGTH_SHORT);

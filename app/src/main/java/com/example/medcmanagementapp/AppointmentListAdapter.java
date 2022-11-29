@@ -17,8 +17,13 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 
 public class AppointmentListAdapter extends ArrayAdapter<Appointment> {
-    public AppointmentListAdapter(Context context, ArrayList<Appointment> appointments) {
+    private boolean isAdmin = false;
+
+    public AppointmentListAdapter(Context context, ArrayList<Appointment> appointments, boolean isAdmin) {
+
+
         super(context, R.layout.activity_single_appointment, appointments);
+        this.isAdmin = isAdmin;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -34,13 +39,17 @@ public class AppointmentListAdapter extends ArrayAdapter<Appointment> {
         TextView appointmentID = convertView.findViewById(R.id.textView21);
         TextView status = convertView.findViewById(R.id.textView18);
         TextView timeString = convertView.findViewById(R.id.textView16);
-
+        if (!isAdmin) {
+            completeAppointment.setEnabled(false);
+            completeAppointment.setVisibility(View.GONE);
+        }
         patientID.setText(appointment.getBitsID());
         completeAppointment.setText(appointment.isCompleted() ? "COMPLETED" : "COMPLETE");
         appointmentID.setText(appointment.getAppointmentID());
         status.setText(appointment.getStatus());
         timeString.setText(appointment.getTimeStamp());
         completeAppointment.setOnClickListener(view -> {
+            System.out.println("Clicked");
             appointment.setCompleted();
             completeAppointment.setText(appointment.isCompleted() ? "COMPLETED" : "COMPLETE");
         });

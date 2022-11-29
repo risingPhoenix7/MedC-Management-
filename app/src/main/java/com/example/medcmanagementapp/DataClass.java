@@ -34,6 +34,15 @@ public class DataClass {
 
     }
 
+    static boolean validateUser(Student a) {
+        if (checkIfStudentExists(a.getBitsID())) {
+            return false;
+        } else {
+            userList.add(a);
+            return true;
+        }
+    }
+
     static boolean checkIfStudentExists(Integer studentID) {
         for (Student s : userList) {
             if (s.getBitsID() == studentID) {
@@ -41,5 +50,15 @@ public class DataClass {
             }
         }
         return false;
+    }
+
+    static ArrayList<Appointment> getAppointmentList(String studentid) {
+        ArrayList<Appointment> a = new ArrayList<Appointment>();
+        for (Appointment s : appointmentList) {
+            if (s.getBitsID().equals(studentid)) {
+                a.add(s);
+            }
+        }
+        return a;
     }
 }
