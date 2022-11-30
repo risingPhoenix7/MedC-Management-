@@ -15,8 +15,39 @@ public class DataClass {
     static int totalRevenueDue = 0;
     static int totalRevenueEarned = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    static boolean checkForAppointment(String a) {
+        ArrayList<Doctor> doctorsOfRequiredType = new ArrayList<Doctor>();
+        for (Doctor d : noticeBoard) {
+            if (d.getConsultation().equals(a)&&d.checkIfDoctorFree()) {
+                doctorsOfRequiredType.add(d);
+            }
+
+        }
+        //TODO: randomly assign a doctor in a randomly assigned time.
+return true;
+    }
+
     static String getTotalRevenue() {
         return totalRevenueDue + " Due\n" + totalRevenueEarned + " Earned";
+    }
+
+    static String[] getDoctorSpecialisations() {
+        ArrayList<String> a = new ArrayList<String>();
+        for (Doctor d : noticeBoard) {
+            a.add(d.getConsultation());
+
+        }
+        System.out.println("HUHUYYUY");
+        a.add("GENERAL");
+        a.add("PKIK");
+        a.add("POIKJ");
+        System.out.println(a.size());
+        String[] b = new String[a.size()];
+        a.toArray(b);
+        System.out.println("HUHUHUH");
+        System.out.println(b.length);
+        return b;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

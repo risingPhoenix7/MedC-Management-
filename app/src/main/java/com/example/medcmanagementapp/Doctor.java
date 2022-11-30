@@ -1,10 +1,13 @@
 package com.example.medcmanagementapp;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.UUID;
 
 class Doctor {
@@ -13,6 +16,7 @@ class Doctor {
     private String consultation;
     private LocalDateTime availableDateTimeStart;
     private LocalDateTime availableDateTimeEnd;
+    private ArrayList<LocalDateTime> alreadyBookedStartTimes = new ArrayList<LocalDateTime>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     Doctor(String doctorName, String consultation, int startHour, int startMinute, int stopHour, int stopMinute) {
@@ -26,6 +30,11 @@ class Doctor {
     @RequiresApi(api = Build.VERSION_CODES.O)
     LocalDateTime getLocalDatetime(int startHour, int startMinute) {
         return LocalDateTime.of(2022, 5, 5, startHour, startMinute);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    boolean checkIfDoctorFree() {
+        return ((MINUTES.between(availableDateTimeEnd, availableDateTimeStart) / 10 - alreadyBookedStartTimes.size()) > 0);
     }
 
     UUID getDoctorID() {

@@ -39,6 +39,11 @@ public class StudentAfterSignupActivity extends AppCompatActivity {
             appointmentIntent.putExtra("Studentid", studentid);
             startActivity(appointmentIntent);
         });
+        createAppointments.setOnClickListener(view -> {
+            Intent appointmentIntent = new Intent(StudentAfterSignupActivity.this, CreateAppointment.class);
+            appointmentIntent.putExtra("Studentid", studentid);
+            startActivity(appointmentIntent);
+        });
         name.setText(studentid);
     }
 }

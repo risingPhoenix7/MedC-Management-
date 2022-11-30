@@ -19,6 +19,9 @@ class Appointment {
     public boolean isCompleted() {
         return isCompleted;
     }
+    public String getAdminCompleteButtonText() {
+        return isCompleted() ? "COMPLETED" : "COMPLETE";
+    }
 
     public String getBitsID() {
         return bitsID;

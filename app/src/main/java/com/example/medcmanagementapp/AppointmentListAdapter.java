@@ -44,14 +44,14 @@ public class AppointmentListAdapter extends ArrayAdapter<Appointment> {
             completeAppointment.setVisibility(View.GONE);
         }
         patientID.setText(appointment.getBitsID());
-        completeAppointment.setText(appointment.isCompleted() ? "COMPLETED" : "COMPLETE");
+        completeAppointment.setText(appointment.getAdminCompleteButtonText());
         appointmentID.setText(appointment.getAppointmentID());
         status.setText(appointment.getStatus());
         timeString.setText(appointment.getTimeStamp());
         completeAppointment.setOnClickListener(view -> {
             System.out.println("Clicked");
             appointment.setCompleted();
-            completeAppointment.setText(appointment.isCompleted() ? "COMPLETED" : "COMPLETE");
+            completeAppointment.setText(appointment.getAdminCompleteButtonText());
         });
         status.setText(appointment.getStatus());
         return convertView;

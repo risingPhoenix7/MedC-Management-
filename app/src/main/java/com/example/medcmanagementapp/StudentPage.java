@@ -33,6 +33,11 @@ public class StudentPage extends AppCompatActivity {
                     startActivity(launchActivity);
 
                 }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
             } catch (Exception e) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Check your details again", Toast.LENGTH_SHORT);
                 toast.show();
