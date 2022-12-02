@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     Button adminButton;
     Button studentButton;
+    Button medicalShopOwnerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +17,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         adminButton = findViewById(R.id.adminbutton);
         studentButton = findViewById(R.id.studentButton);
+        medicalShopOwnerButton = findViewById(R.id.medicalShopOwnerButton);
         adminButton.setOnClickListener(view -> {
             Intent launchActivity1 = new Intent(MainActivity.this, AdminPage.class);
+            startActivity(launchActivity1);
+        });
+        medicalShopOwnerButton.setOnClickListener(view -> {
+            Intent launchActivity1 = new Intent(MainActivity.this, AdminPage.class);
+            launchActivity1.putExtra("isMedicalShopOwner","true");
             startActivity(launchActivity1);
         });
         studentButton.setOnClickListener(view -> {

@@ -31,7 +31,7 @@ public class DoctorsListView extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(DoctorsListView.this, EditDoctorsActivity.class);
-                intent.putExtra("position", i);
+                intent.putExtra("position", Integer.toString(i));
                 startActivity(intent);
             }
         });

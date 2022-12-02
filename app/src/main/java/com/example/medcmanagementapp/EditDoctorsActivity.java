@@ -46,7 +46,7 @@ public class EditDoctorsActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         if (intent != null) {
             System.out.println(intent.getStringExtra("position"));
-            position = (intent.getIntExtra("position", 0));
+            position = Integer.parseInt(intent.getStringExtra("position"));
             doctor = DataClass.noticeBoard.get(position);
         }
         stopHour = doctor.getStopHour();
@@ -58,9 +58,12 @@ public class EditDoctorsActivity extends AppCompatActivity {
         doctorConsultation.setText(doctor.getConsultation());
         openStartTimePickerButton.setText(doctor.getStartTime());
         openStopTimePickerButton.setText(doctor.getStopTime());
-        openStartTimePickerButton.setOnClickListener(this::startPopTimePicker);
         openStopTimePickerButton.setOnClickListener(this::stopPopTimePicker);
         int finalPosition = position;
+        openStartTimePickerButton.setOnClickListener(view->{
+            Toast toast = Toast.makeText(getApplicationContext(), "Start time cannot be edited.", Toast.LENGTH_SHORT);
+            toast.show();
+        });
         submitButton.setOnClickListener(view -> {
             String name = doctorNameField.getText().toString();
             String consultation = doctorConsultation.getText().toString();
@@ -97,17 +100,4 @@ public class EditDoctorsActivity extends AppCompatActivity {
         timePickerDialog2.show();
     }
 
-    private void startPopTimePicker(View view) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                startHour = selectedHour;
-                startMinute = selectedMinute;
-                openStartTimePickerButton.setText(String.format(Locale.getDefault(), "%02d:%02d", startHour, startMinute));
-            }
-        };
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, startHour == null ? 12 : startHour, startMinute == null ? 5 : startMinute, true);
-        timePickerDialog.setTitle("Set Start Time");
-        timePickerDialog.show();
-    }
 }

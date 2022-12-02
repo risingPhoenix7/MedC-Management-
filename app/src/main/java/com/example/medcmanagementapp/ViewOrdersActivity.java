@@ -17,7 +17,7 @@ public class ViewOrdersActivity extends AppCompatActivity {
         binding = ActivityViewOrdersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent intent = this.getIntent();
-        String studentid = intent.getStringExtra("studentid");
+        String studentid = intent.getStringExtra("Studentid");
 
         listAdapter = new OrdersListAdapter(ViewOrdersActivity.this, studentid == null ? DataClass.orderList : DataClass.getStudentOrders(studentid));
         binding.viewInventoryList.setAdapter(listAdapter);

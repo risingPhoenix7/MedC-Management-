@@ -4,9 +4,20 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DataClass {
+    static class CustomDoctorTime {
+        public CustomDoctorTime(Doctor doctor, LocalDateTime localDateTime) {
+            this.doctor = doctor;
+            this.localDateTime = localDateTime;
+        }
+
+        Doctor doctor;
+        LocalDateTime localDateTime;
+
+    }
     static ArrayList<Student> userList = new ArrayList<Student>();
     static ArrayList<Doctor> noticeBoard = new ArrayList<Doctor>();
     static ArrayList<Medicine> medicineList = new ArrayList<Medicine>();
@@ -64,27 +75,51 @@ public class DataClass {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    static boolean checkForAppointment(String a) {
-//        ArrayList<Doctor> doctorsOfRequiredType = new ArrayList<Doctor>();
-//        for (Doctor d : noticeBoard) {
-//            if (d.getConsultation().equals(a) && d.checkIfDoctorFree()) {
-//                doctorsOfRequiredType.add(d);
-//            }
-//        }
-//        if (doctorsOfRequiredType.size() > 0) {
-//            if (doctorsOfRequiredType.size() == 1) {
-//                LocalDateTime dateTime = doctorsOfRequiredType.get(0).randomlyAssignTimeAmongAvailableTimes();
-//            } else {
-//                Doctor d = randomlyAssignDoctor(doctorsOfRequiredType);
-//                d.randomlyAssignTimeAmongAvailableTimes();
-//            }
-//        }
-//        return false;
+    static LocalDateTime checkForAppointment(String a, String bitsID) {
+        System.out.println(a + bitsID);
 
+        ArrayList<Doctor> doctorsOfRequiredType = new ArrayList<Doctor>();
+        for (Doctor d : noticeBoard) {
+            if (d.getConsultation().equals(a)) {
+                doctorsOfRequiredType.add(d);
+            }
+        }
+        CustomDoctorTime customDoctorTime = getRequiredDoctorAppointment(doctorsOfRequiredType);
+        System.out.println("JIJIJIIJ");
+        System.out.println(customDoctorTime.localDateTime);
+        System.out.println(customDoctorTime.doctor);
+        if (customDoctorTime != null || customDoctorTime.localDateTime == null) {
+            DataClass.appointmentList.add(new Appointment(bitsID, customDoctorTime.doctor.getDoctorID(), customDoctorTime.localDateTime));
+            return customDoctorTime.localDateTime;
+        }
+        return null;
+    }
 
-        //TODO: randomly assign a doctor in a randomly assigned time.
-
-        return true;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    static CustomDoctorTime getRequiredDoctorAppointment(ArrayList<Doctor> doctorsOfRequiredType) {
+        System.out.println("KOKOK");
+        System.out.println(doctorsOfRequiredType.size());
+        if (doctorsOfRequiredType.size() > 0) {
+            Doctor d;
+            if (doctorsOfRequiredType.size() == 1) {
+                d = doctorsOfRequiredType.get(0);
+                System.out.println("OOKOKO");
+                System.out.println(d.getDoctorName());
+                LocalDateTime localDateTime = d.getAppointmentSlot();
+                return new DataClass.CustomDoctorTime(d, localDateTime);
+            } else {
+                d = randomlyAssignDoctor(doctorsOfRequiredType);
+                LocalDateTime appointmentSlot = d.getAppointmentSlot();
+                if (appointmentSlot == null) {
+                    doctorsOfRequiredType.remove(d);
+                    return getRequiredDoctorAppointment(doctorsOfRequiredType);
+                } else {
+                    return new CustomDoctorTime(d, appointmentSlot);
+                }
+                // d.randomlyAssignTimeAmongAvailableTimes();
+            }
+        }
+        return null;
     }
 
     static Doctor randomlyAssignDoctor(ArrayList<Doctor> a) {
@@ -100,12 +135,8 @@ public class DataClass {
         ArrayList<String> a = new ArrayList<String>();
         for (Doctor d : noticeBoard) {
             a.add(d.getConsultation());
-
         }
         System.out.println("HUHUYYUY");
-        a.add("GENERAL");
-        a.add("PKIK");
-        a.add("POIKJ");
         System.out.println(a.size());
         String[] b = new String[a.size()];
         a.toArray(b);
@@ -167,3 +198,6 @@ public class DataClass {
         return a;
     }
 }
+
+
+

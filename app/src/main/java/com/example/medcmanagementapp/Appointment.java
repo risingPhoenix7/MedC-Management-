@@ -19,6 +19,7 @@ class Appointment {
     public boolean isCompleted() {
         return isCompleted;
     }
+
     public String getAdminCompleteButtonText() {
         return isCompleted() ? "COMPLETED" : "COMPLETE";
     }
@@ -38,7 +39,7 @@ class Appointment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String getStatus() {
-        if (timestamp.compareTo(LocalDateTime.now()) > 0) {
+        if (timestamp.isAfter(LocalDateTime.now())) {
             return "PENDING";
         } else if (isCompleted) {
             return "COMPLETED";
@@ -49,7 +50,7 @@ class Appointment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setCompleted() {
-        if (timestamp.compareTo(LocalDateTime.now()) < 0) {
+        if (LocalDateTime.now().isAfter(timestamp)) {
             isCompleted = true;
         }
     }

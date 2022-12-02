@@ -6,6 +6,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -25,51 +26,94 @@ class Doctor {
         this.consultation = consultation;
         this.availableDateTimeStart = getLocalDatetime(startHour, startMinute);
         this.availableDateTimeEnd = getLocalDatetime(stopHour, stopMinute);
+        //if the doctor is working overnight shifts
+        if (this.availableDateTimeEnd.isBefore(this.availableDateTimeStart)) {
+            this.availableDateTimeEnd = this.availableDateTimeEnd.plusDays(1);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     LocalDateTime getLocalDatetime(int startHour, int startMinute) {
-        return LocalDateTime.of(2022, 5, 5, startHour, startMinute);
+        return LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), startHour, startMinute);
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
-    LocalDateTime checkIfDoctorFree() {
-        if (alreadyBookedStartTimes.size() == 0) {
-            if (MINUTES.between(availableDateTimeStart, availableDateTimeEnd) > 10) {
-                return availableDateTimeStart;
-                // if doctors available time is less than 10.
+    LocalDateTime getAppointmentSlot() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        if (currentTime.isAfter(availableDateTimeEnd)) {
+            System.out.println("guy");
+            return null;
+        } else if (currentTime.isAfter(availableDateTimeStart)) {
+            if (alreadyBookedStartTimes.size() == 0) {
+                System.out.println("KOI");
+                alreadyBookedStartTimes.add(currentTime);
+                return currentTime;
             } else {
-                return null;
+                if (currentTime.isAfter(alreadyBookedStartTimes.get(alreadyBookedStartTimes.size() - 1).plusMinutes(10))) {
+                    System.out.println("KOIU");
+                    alreadyBookedStartTimes.add(currentTime);
+                    return currentTime;
+                } else {
+                    System.out.println("KOIUddd");
+                    LocalDateTime a = (alreadyBookedStartTimes.get(alreadyBookedStartTimes.size() - 1).plusMinutes(10));
+                    alreadyBookedStartTimes.add(a);
+                    return a;
+                }
             }
         } else {
-            if (alreadyBookedStartTimes.get(0).equals(availableDateTimeStart)) {
+            if (alreadyBookedStartTimes.size() == 0) {
+                System.out.println("DRD");
+                if (MINUTES.between(availableDateTimeStart, availableDateTimeEnd) >= 10) {
+                    alreadyBookedStartTimes.add(availableDateTimeStart);
+                    return availableDateTimeStart;
+                } else {
+                    System.out.println("FSHSK");
+                    return null;
+                }
+            } else {
                 LocalDateTime a = alreadyBookedStartTimes.get(alreadyBookedStartTimes.size() - 1).plusMinutes(10);
-                if (a.compareTo(availableDateTimeEnd) <= 0) {
+                if (MINUTES.between(a, availableDateTimeEnd) >= 10) {
+                    System.out.println("TGSFHAS");
+                    alreadyBookedStartTimes.add(a);
                     return a;
                 } else {
-                    return null;
-                }
-            } else {
-                if (MINUTES.between(availableDateTimeStart, alreadyBookedStartTimes.get(0)) > 10) {
-                    return alreadyBookedStartTimes.get(0).minusMinutes(10);
-
-                } else {
+                    System.out.println("HDHD");
                     return null;
                 }
             }
         }
-
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private LocalDateTime checkIfTimeIsFuture(LocalDateTime a) {
-        if (a.compareTo(LocalDateTime.now()) <= 0) {
-            return null;
-        } else {
-            return a;
-        }
-    }
+
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    LocalDateTime checkIfDoctorFree() {
+//        if (alreadyBookedStartTimes.size() == 0) {
+//            if (MINUTES.between(availableDateTimeStart, availableDateTimeEnd) > 10) {
+//                return availableDateTimeStart;
+//                // if doctors available time is less than 10.
+//            } else {
+//                return null;
+//            }
+//        } else {
+//            if (alreadyBookedStartTimes.get(0).equals(availableDateTimeStart)) {
+//                LocalDateTime a = alreadyBookedStartTimes.get(alreadyBookedStartTimes.size() - 1).plusMinutes(10);
+//                if (a.compareTo(availableDateTimeEnd) <= 0) {
+//                    return a;
+//                } else {
+//                    return null;
+//                }
+//            } else {
+//                if (MINUTES.between(availableDateTimeStart, alreadyBookedStartTimes.get(0)) > 10) {
+//                    return alreadyBookedStartTimes.get(0).minusMinutes(10);
+//
+//                } else {
+//                    return null;
+//                }
+//            }
+//        }
+//
+//    }
+
 
     UUID getDoctorID() {
         return doctorID;
