@@ -29,9 +29,15 @@ public class AddMedicinesActivity extends AppCompatActivity {
                             int a = Integer.parseInt(medicineQuantity.getText().toString());
                             float b = Float.parseFloat(medicinePrice.getText().toString());
                             if (a >= 0 && b >= 0) {
-                                DataClass.medicineList.add(new Medicine(medicineName.getText().toString(), b, a));
-                                Toast toast = Toast.makeText(getApplicationContext(), "Added successfully", Toast.LENGTH_SHORT);
-                                toast.show();
+                                if(DataClass.addMedicine(new Medicine(medicineName.getText().toString(), b, a))){
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Added successfully", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                                else{
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Such a medicine already exists", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+
                             }
 
                         } catch (Exception e) {

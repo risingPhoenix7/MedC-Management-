@@ -23,7 +23,7 @@ public class StudentAfterSignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_after_signup);
         Intent intent = this.getIntent();
         try {
-            studentid = intent.getExtras().get("studentid").toString();
+            studentid = intent.getExtras().get("Studentid").toString();
             System.out.println(studentid);
         } catch (Exception e) {
             studentid = "5487";
@@ -44,6 +44,17 @@ public class StudentAfterSignupActivity extends AppCompatActivity {
             appointmentIntent.putExtra("Studentid", studentid);
             startActivity(appointmentIntent);
         });
+        buyMedicines.setOnClickListener(view -> {
+            Intent appointmentIntent = new Intent(StudentAfterSignupActivity.this, BuyMedicinesActivity.class);
+            appointmentIntent.putExtra("Studentid", studentid);
+            startActivity(appointmentIntent);
+        });
+        seePurchases.setOnClickListener(view -> {
+            Intent appointmentIntent = new Intent(StudentAfterSignupActivity.this, ViewOrdersActivity.class);
+            appointmentIntent.putExtra("Studentid", studentid);
+            startActivity(appointmentIntent);
+        });
         name.setText(studentid);
     }
+
 }

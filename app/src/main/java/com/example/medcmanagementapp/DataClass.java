@@ -15,17 +15,81 @@ public class DataClass {
     static int totalRevenueDue = 0;
     static int totalRevenueEarned = 0;
 
+    static ArrayList<Order> getStudentOrders(String studentid) {
+        int id = Integer.parseInt(studentid);
+        ArrayList<Order> a = new ArrayList<Order>();
+        for (Order order : orderList) {
+            if (order.getBitsID() == id) {
+                a.add(order);
+            }
+        }
+        return a;
+    }
+
+    static boolean buyMedicine(Medicine m, int quantity, boolean isCash, int studentid) {
+
+        if (checkIfStudentExists(studentid)) {
+            orderList.add(new Order(studentid, m.getItemName(), quantity, isCash ? "CASH" : "CREDIT"));
+            for (Medicine medicine : medicineList) {
+                if (medicine.getItemName().equals(m.getItemName())) {
+                    medicine.setDefQuantity(medicine.getDefQuantity() - quantity);
+                    if (isCash) {
+                        totalRevenueEarned += m.getPrice() * quantity;
+                    } else {
+                        totalRevenueDue += m.getPrice() * quantity;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static ArrayList<String> getMedicineList() {
+        ArrayList<String> a = new ArrayList<String>();
+        for (Medicine medicine : medicineList) {
+            a.add(medicine.getItemName());
+        }
+        return a;
+    }
+
+    static boolean addMedicine(Medicine a) {
+        for (Medicine m : medicineList) {
+            if (a.getItemName().equals(m.getItemName())) {
+                return false;
+            }
+        }
+        medicineList.add(a);
+        return true;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     static boolean checkForAppointment(String a) {
-        ArrayList<Doctor> doctorsOfRequiredType = new ArrayList<Doctor>();
-        for (Doctor d : noticeBoard) {
-            if (d.getConsultation().equals(a)&&d.checkIfDoctorFree()) {
-                doctorsOfRequiredType.add(d);
-            }
+//        ArrayList<Doctor> doctorsOfRequiredType = new ArrayList<Doctor>();
+//        for (Doctor d : noticeBoard) {
+//            if (d.getConsultation().equals(a) && d.checkIfDoctorFree()) {
+//                doctorsOfRequiredType.add(d);
+//            }
+//        }
+//        if (doctorsOfRequiredType.size() > 0) {
+//            if (doctorsOfRequiredType.size() == 1) {
+//                LocalDateTime dateTime = doctorsOfRequiredType.get(0).randomlyAssignTimeAmongAvailableTimes();
+//            } else {
+//                Doctor d = randomlyAssignDoctor(doctorsOfRequiredType);
+//                d.randomlyAssignTimeAmongAvailableTimes();
+//            }
+//        }
+//        return false;
 
-        }
+
         //TODO: randomly assign a doctor in a randomly assigned time.
-return true;
+
+        return true;
+    }
+
+    static Doctor randomlyAssignDoctor(ArrayList<Doctor> a) {
+        int index = (int) (Math.random() * (a.size() - 1));
+        return a.get(index);
     }
 
     static String getTotalRevenue() {
@@ -88,6 +152,16 @@ return true;
         for (Appointment s : appointmentList) {
             if (s.getBitsID().equals(studentid)) {
                 a.add(s);
+            }
+        }
+        return a;
+    }
+
+    static ArrayList<Order> getOrderList(String studentid) {
+        ArrayList<Order> a = new ArrayList<Order>();
+        for (Order o : orderList) {
+            if (o.getBitsID() == (Long.parseLong(studentid))) {
+                a.add(o);
             }
         }
         return a;

@@ -12,6 +12,7 @@ public class AdminPage extends AppCompatActivity {
     Button viewInventory;
     Button viewAppointments;
     TextView showTotalRevenue;
+    Button goToOrdersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,11 @@ public class AdminPage extends AppCompatActivity {
         viewAppointments = findViewById(R.id.button5);
         showTotalRevenue = findViewById(R.id.textView2);
         showTotalRevenue.setText(DataClass.getTotalRevenue());
+        goToOrdersList=findViewById(R.id.button16);
+        goToOrdersList.setOnClickListener(view->{
+            Intent launchActivity1 = new Intent(AdminPage.this, ViewOrdersActivity.class);
+            startActivity(launchActivity1);
+        });
         goToDoctorsPage.setOnClickListener(view -> {
             Intent launchActivity1 = new Intent(AdminPage.this, DoctorsListView.class);
             startActivity(launchActivity1);

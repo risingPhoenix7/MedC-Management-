@@ -8,12 +8,14 @@
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_add_medicines.xml" value="0.264" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_admin_page.xml" value="0.4" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_appointment_list.xml" value="0.25" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_buy_medicines.xml" value="0.264" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_create_appointment.xml" value="0.25" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_doctors_list_view.xml" value="0.264" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_edit_doctors.xml" value="0.2" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_edit_medicine.xml" value="0.4" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_edit_medicines.xml" value="0.25" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_order_list_adapter.xml" value="0.25" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_sign_in_page.xml" value="0.536" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_sign_up_page.xml" value="0.4" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_single_appointment.xml" value="0.4" />
@@ -22,6 +24,8 @@
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_student_after_signup.xml" value="0.4" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_student_page.xml" value="0.4" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_view_inventory.xml" value="0.25" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_view_orders.xml" value="0.2" />
+        <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/activity_view_single_order.xml" value="0.4" />
         <entry key="..\:/Users/achin/AndroidStudioProjects/MedCManagementApp/app/src/main/res/layout/content_scrolling.xml" value="0.4" />
       </map>
     </option>

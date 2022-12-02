@@ -29,7 +29,7 @@ public class StudentPage extends AppCompatActivity {
                 if (DataClass.checkIfStudentExists(Integer.parseInt(userId.getText().toString()))) {
                     Intent launchActivity = new Intent(StudentPage.this, StudentAfterSignupActivity.class);
                     String a = (userId.getText().toString());
-                    launchActivity.putExtra("studentid", a);
+                    launchActivity.putExtra("Studentid", a);
                     startActivity(launchActivity);
 
                 }

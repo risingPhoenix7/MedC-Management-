@@ -32,9 +32,43 @@ class Doctor {
         return LocalDateTime.of(2022, 5, 5, startHour, startMinute);
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    boolean checkIfDoctorFree() {
-        return ((MINUTES.between(availableDateTimeEnd, availableDateTimeStart) / 10 - alreadyBookedStartTimes.size()) > 0);
+    LocalDateTime checkIfDoctorFree() {
+        if (alreadyBookedStartTimes.size() == 0) {
+            if (MINUTES.between(availableDateTimeStart, availableDateTimeEnd) > 10) {
+                return availableDateTimeStart;
+                // if doctors available time is less than 10.
+            } else {
+                return null;
+            }
+        } else {
+            if (alreadyBookedStartTimes.get(0).equals(availableDateTimeStart)) {
+                LocalDateTime a = alreadyBookedStartTimes.get(alreadyBookedStartTimes.size() - 1).plusMinutes(10);
+                if (a.compareTo(availableDateTimeEnd) <= 0) {
+                    return a;
+                } else {
+                    return null;
+                }
+            } else {
+                if (MINUTES.between(availableDateTimeStart, alreadyBookedStartTimes.get(0)) > 10) {
+                    return alreadyBookedStartTimes.get(0).minusMinutes(10);
+
+                } else {
+                    return null;
+                }
+            }
+        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private LocalDateTime checkIfTimeIsFuture(LocalDateTime a) {
+        if (a.compareTo(LocalDateTime.now()) <= 0) {
+            return null;
+        } else {
+            return a;
+        }
     }
 
     UUID getDoctorID() {
