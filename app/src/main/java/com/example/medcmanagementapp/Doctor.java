@@ -44,8 +44,6 @@ class Doctor {
         LocalDateTime startTime = availableDateTimeStart.with(TemporalAdjusters.nextOrSame(selectedDay));
         LocalDateTime endTime = availableDateTimeEnd.plusDays(DAYS.between(availableDateTimeStart, startTime));
         for (LocalDateTime localDateTime = startTime; localDateTime.plusMinutes(10).isBefore(endTime) || localDateTime.plusMinutes(10).isEqual(endTime); localDateTime = localDateTime.plusMinutes(10)) {
-
-            System.out.println(localDateTime);
             if (checkIfAlreadyBookedSlotsComeInBetween(localDateTime)) {
                 System.out.println(localDateTime);
                 arr.add(localDateTime);
@@ -59,11 +57,12 @@ class Doctor {
     boolean checkIfAlreadyBookedSlotsComeInBetween(LocalDateTime localDateTime) {
         for (LocalDateTime a : alreadyBookedStartTimes) {
             System.out.println("KJLWDHKJDWBHKJDWBHDJHDWJOHDWHON");
-            System.out.println(alreadyBookedStartTimes);
             if (checkIfBetween(a, localDateTime) || checkIfBetween(localDateTime, a)) {
+                System.out.println("Going here??");
                 return false;
             }
         }
+        System.out.println("Not going here?");
         return true;
     }
 
