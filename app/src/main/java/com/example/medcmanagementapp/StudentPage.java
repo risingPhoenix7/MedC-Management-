@@ -31,7 +31,6 @@ public class StudentPage extends AppCompatActivity {
                     String a = (userId.getText().toString());
                     launchActivity.putExtra("Studentid", a);
                     startActivity(launchActivity);
-
                 }
                 else{
                     Toast toast = Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_SHORT);

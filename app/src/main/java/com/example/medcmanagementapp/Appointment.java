@@ -16,6 +16,14 @@ class Appointment {
     private final LocalDateTime timestamp;
     private boolean isCompleted;
 
+    public UUID getDoctorID() {
+        return doctorID;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
     public boolean isCompleted() {
         return isCompleted;
     }
@@ -28,10 +36,6 @@ class Appointment {
         return bitsID;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String getTimeStamp() {
-        return timestamp.getDayOfMonth() + "th " + timestamp.getMonth() + "\n" + timestamp.getHour() + ":" + timestamp.getMinute();
-    }
 
     public String getAppointmentID() {
         return appointmentID.toString();

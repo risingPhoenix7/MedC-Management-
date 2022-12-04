@@ -6,6 +6,18 @@ public class Student {
     private String mailID;
     private String number;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getBitsID() {
+        return bitsID;
+    }
+
+    public void setBitsID(String bitsID) {
+        this.bitsID = bitsID;
+    }
+
     Student(String name, String bitsID, String mailID, String number) {
         this.name = name;
         this.bitsID = bitsID;
@@ -17,9 +29,6 @@ public class Student {
         this.name = name;
     }
 
-    public void setBitsID(String bitsID) {
-        this.bitsID = bitsID;
-    }
 
     public void setMailID(String mailID) {
         this.mailID = mailID;
@@ -27,14 +36,6 @@ public class Student {
 
     public void setNumber(String number) {
         this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getBitsID() {
-        return bitsID;
     }
 
     public String getMailID() {

@@ -32,7 +32,9 @@ public class DoctorListAdapter extends ArrayAdapter<Doctor> {
         TextView consultation = convertView.findViewById(R.id.editTextTextPersonName8);
         TextView id = convertView.findViewById(R.id.textView3);
         TextView visitingHours = convertView.findViewById(R.id.editTextTextPersonName10);
+        TextView daysAvailable = convertView.findViewById(R.id.textView39);
         doctorname.setText(doctor.getDoctorName());
+        daysAvailable.setText(doctor.getAvailableDaysTextField());
         consultation.setText(doctor.getConsultation());
         id.setText(doctor.getDoctorID().toString());
         visitingHours.setText(doctor.getAvailableTimeSlot());

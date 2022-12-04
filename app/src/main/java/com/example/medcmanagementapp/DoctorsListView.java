@@ -34,16 +34,6 @@ public class DoctorsListView extends AppCompatActivity {
             addDoctorsPage.setVisibility(View.GONE);
             isEditable = false;
         }
-        if (isEditable) {
-            binding.doctorslistid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(DoctorsListView.this, EditDoctorsActivity.class);
-                    intent.putExtra("position", Integer.toString(i));
-                    startActivity(intent);
-                }
-            });
-        }
         addDoctorsPage.setOnClickListener(view -> {
             Intent launchActivity1 = new Intent(DoctorsListView.this, AddDoctorsActivity.class);
             startActivity(launchActivity1);
