@@ -21,6 +21,10 @@ public class DataClass {
     static int totalRevenueEarned = 0;
 
     static Appointment checkandCreateAppointment(LocalDateTime localDateTime, Integer indexOfDoctorInList, String studentID) {
+        if(noticeBoard.get(indexOfDoctorInList).getAlreadyBookedStartTimes().contains(localDateTime)){
+            return null;
+        }
+        noticeBoard.get(indexOfDoctorInList).addAlreadyBookedStartTime(localDateTime);
         Appointment appointment = new Appointment(studentID, noticeBoard.get(indexOfDoctorInList).getDoctorID(), localDateTime);
         appointmentList.add(appointment);
         return appointment;

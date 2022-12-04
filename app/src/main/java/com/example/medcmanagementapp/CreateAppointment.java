@@ -59,8 +59,9 @@ public class CreateAppointment extends AppCompatActivity {
             if (dropdDownMenu.getSelectedItem() != null && daySelector.getSelectedItem() != null) {
                 timeSelector.setVisibility(View.VISIBLE);
                 updateAvailableTimeSlots();
-                timeSelector.setAdapter(new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, availableTimeSlots));
-
+                ArrayAdapter<String> dropdownAdapter33 = new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, availableTimeSlots);
+                dropdownAdapter33.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                timeSelector.setAdapter(dropdownAdapter33);
             }
         });
 
@@ -68,13 +69,14 @@ public class CreateAppointment extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("KJWDBDWNBDWNBWD");
-//                dropdownAdapter2.clear();
-//                dropdownAdapter2 = new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, DataClass.getDoctorAvailableDays(dropdDownMenu.getSelectedItemPosition()));
                 updateAvailableDays();
+                ArrayAdapter<String> dropdownAdapter2 = new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, availableDays);
+                dropdownAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                daySelector.setAdapter(dropdownAdapter2);
                 updateAvailableTimeSlots();
-                timeSelector.setAdapter(new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, availableTimeSlots));
-                daySelector.setAdapter(new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, availableDays));
+                ArrayAdapter<String> dropdownAdapter3 = new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_list_item_1, availableTimeSlots);
+                dropdownAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                timeSelector.setAdapter(dropdownAdapter3);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -94,6 +96,11 @@ public class CreateAppointment extends AppCompatActivity {
             System.out.println("KJWDHKDWHBKDWN");
             if (daySelector.getSelectedItem() != null && timeSelector.getSelectedItem() != null && localDateTimeArrayListReturnedFromFunction != null && bitsID != null) {
                 appointment = DataClass.checkandCreateAppointment(localDateTimeArrayListReturnedFromFunction.get(timeSelector.getSelectedItemPosition()), dropdDownMenu.getSelectedItemPosition(), bitsID);
+
+                if (appointment == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "You werent supposed to do that", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 Toast toast = Toast.makeText(getApplicationContext(), "Appointment created at" + appointment.getTimestamp().format(DateTimeFormatter.ofPattern("HH:mm")) + ". Please be on time", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();

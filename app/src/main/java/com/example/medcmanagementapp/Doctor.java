@@ -20,6 +20,15 @@ class Doctor {
     private LocalDateTime availableDateTimeStart;
     private LocalDateTime availableDateTimeEnd;
     private ArrayList<DayOfWeek> daysAvailable = new ArrayList<DayOfWeek>();
+
+    public void addAlreadyBookedStartTime(LocalDateTime a) {
+        this.alreadyBookedStartTimes.add(a);
+    }
+
+    public ArrayList<LocalDateTime> getAlreadyBookedStartTimes() {
+        return alreadyBookedStartTimes;
+    }
+
     private ArrayList<LocalDateTime> alreadyBookedStartTimes = new ArrayList<LocalDateTime>();
 
     public LocalDateTime getAvailableDateTimeStart() {
@@ -47,7 +56,6 @@ class Doctor {
             if (checkIfAlreadyBookedSlotsComeInBetween(localDateTime)) {
                 System.out.println(localDateTime);
                 arr.add(localDateTime);
-                alreadyBookedStartTimes.add(localDateTime);
             }
         }
         return arr;
@@ -58,6 +66,7 @@ class Doctor {
         for (LocalDateTime a : alreadyBookedStartTimes) {
             System.out.println("KJLWDHKJDWBHKJDWBHDJHDWJOHDWHON");
             if (checkIfBetween(a, localDateTime) || checkIfBetween(localDateTime, a)) {
+                System.out.println("checking"+localDateTime+"and "+a);
                 System.out.println("Going here??");
                 return false;
             }
