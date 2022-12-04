@@ -16,6 +16,7 @@ public class DoctorsListView extends AppCompatActivity {
     ActivityDoctorsListViewBinding binding;
     Button addDoctorsPage;
     DoctorListAdapter listAdapter;
+    boolean isEditable = true;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -27,15 +28,22 @@ public class DoctorsListView extends AppCompatActivity {
         listAdapter = new DoctorListAdapter(DoctorsListView.this, DataClass.noticeBoard);
         binding.doctorslistid.setAdapter(listAdapter);
         binding.doctorslistid.setClickable(true);
-        binding.doctorslistid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(DoctorsListView.this, EditDoctorsActivity.class);
-                intent.putExtra("position", Integer.toString(i));
-                startActivity(intent);
-            }
-        });
-
+        Intent intent = this.getIntent();
+        if (intent.getStringExtra("Studentid") != null) {
+            addDoctorsPage.setEnabled(false);
+            addDoctorsPage.setVisibility(View.GONE);
+            isEditable = false;
+        }
+        if (isEditable) {
+            binding.doctorslistid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(DoctorsListView.this, EditDoctorsActivity.class);
+                    intent.putExtra("position", Integer.toString(i));
+                    startActivity(intent);
+                }
+            });
+        }
         addDoctorsPage.setOnClickListener(view -> {
             Intent launchActivity1 = new Intent(DoctorsListView.this, AddDoctorsActivity.class);
             startActivity(launchActivity1);

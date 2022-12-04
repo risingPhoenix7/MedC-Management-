@@ -63,7 +63,7 @@ public class BuyMedicinesActivity extends AppCompatActivity {
             RadioButton radioButton = findViewById(modeOfPayment.getCheckedRadioButtonId());
             if (!(quantityField.getText().toString().isEmpty())) {
                 if (medicine != null && Integer.parseInt(quantityField.getText().toString()) > 0) {
-                    boolean a=DataClass.buyMedicine(medicine, Integer.parseInt(quantityField.getText().toString()), radioButton.getText().equals("Cash"), Integer.parseInt(studentid));
+                    boolean a=DataClass.buyMedicine(medicine, Integer.parseInt(quantityField.getText().toString()), radioButton.getText().equals("Cash"), studentid);
                     if(a){
                         Toast toast = Toast.makeText(getApplicationContext(), "Bought successfully", Toast.LENGTH_SHORT);
                         toast.show();
@@ -94,8 +94,6 @@ public class BuyMedicinesActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                System.out.println("huhuhuhuhuhu");
-                System.out.println(s);
                 if (!(s.toString().isEmpty())) {
                     int quantity = Integer.parseInt(s.toString());
                     if (medicine != null) {
@@ -113,8 +111,6 @@ public class BuyMedicinesActivity extends AppCompatActivity {
                 else{
                     totalPrice.setText("0");
                 }
-
-
             }
         });
     }

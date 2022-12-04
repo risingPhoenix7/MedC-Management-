@@ -33,7 +33,7 @@ public class OrdersListAdapter extends ArrayAdapter<Order> {
         TextView PaymentMode=convertView.findViewById(R.id.textView38);
 
         orderID.setText(order.getOrderID().toString());
-        studentID.setText(Long.toString(order.getBitsID()));
+        studentID.setText((order.getBitsID()));
         medicineName.setText(order.getMedicineName());
         quantity.setText(order.getStringOrderQuantity());
         PaymentMode.setText(order.getPaymentMethod());

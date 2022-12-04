@@ -26,12 +26,12 @@ public class SignUpPage extends AppCompatActivity {
         submitButton.setOnClickListener(view -> {
             try {
                 if (!nameEditText.getText().toString().isEmpty() && !idEditText.getText().toString().isEmpty() && !emailEditText.getText().toString().isEmpty() && !PhoneEditText.getText().toString().isEmpty()) {
-                    boolean a = DataClass.validateUser(new Student(nameEditText.getText().toString(), Integer.parseInt(idEditText.getText().toString()), emailEditText.getText().toString(), PhoneEditText.getText().toString()));
-                    if (a == true) {
+                    String a = DataClass.validateUser(new Student(nameEditText.getText().toString(), (idEditText.getText().toString()), emailEditText.getText().toString(), PhoneEditText.getText().toString()));
+                    if (a ==null) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Successfully added user. Please login", Toast.LENGTH_SHORT);
                         toast.show();
                     } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), "User already exists. Please login", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT);
                         toast.show();
                     }
 

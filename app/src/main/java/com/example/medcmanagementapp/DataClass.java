@@ -18,29 +18,32 @@ public class DataClass {
         LocalDateTime localDateTime;
 
     }
-    static ArrayList<Student> userList = new ArrayList<Student>();
-    static ArrayList<Doctor> noticeBoard = new ArrayList<Doctor>();
-    static ArrayList<Medicine> medicineList = new ArrayList<Medicine>();
-    static ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
-    static ArrayList<Order> orderList = new ArrayList<Order>();
+
+    static ArrayList<Student> userList = new ArrayList<>();
+    static ArrayList<Doctor> noticeBoard = new ArrayList<>();
+    static ArrayList<Medicine> medicineList = new ArrayList<>();
+    static ArrayList<Appointment> appointmentList = new ArrayList<>();
+    static ArrayList<Order> orderList = new ArrayList<>();
     static int totalRevenueDue = 0;
     static int totalRevenueEarned = 0;
 
     static ArrayList<Order> getStudentOrders(String studentid) {
-        int id = Integer.parseInt(studentid);
-        ArrayList<Order> a = new ArrayList<Order>();
+        ArrayList<Order> a = new ArrayList<>();
         for (Order order : orderList) {
-            if (order.getBitsID() == id) {
+            if (order.getBitsID().equals(studentid)) {
                 a.add(order);
             }
         }
         return a;
     }
 
-    static boolean buyMedicine(Medicine m, int quantity, boolean isCash, int studentid) {
+    static boolean buyMedicine(Medicine m, int quantity, boolean isCash, String studentid) {
 
         if (checkIfStudentExists(studentid)) {
-            orderList.add(new Order(studentid, m.getItemName(), quantity, isCash ? "CASH" : "CREDIT"));
+            if (quantity > m.getDefQuantity()) {
+                return false;
+            }
+            orderList.add(new Order(studentid, m.getItemName(), quantity, isCash ? "CASH" : "LATER"));
             for (Medicine medicine : medicineList) {
                 if (medicine.getItemName().equals(m.getItemName())) {
                     medicine.setDefQuantity(medicine.getDefQuantity() - quantity);
@@ -160,16 +163,38 @@ public class DataClass {
 
     }
 
-    static boolean validateUser(Student a) {
+    static String validateUser(Student a) {
         if (checkIfStudentExists(a.getBitsID())) {
-            return false;
+            return "User already exists. Please login";
         } else {
-            userList.add(a);
-            return true;
+            try {
+                if ((int) (Math.log10(Integer.parseInt(a.getBitsID()))) == 7) {
+                    String[] b = (a.getMailID().split("@"));
+                    if (b.length != 2) {
+                        return "Invalid mail id";
+                    } else {
+                        if (b[1].equals("pilani.bits-pilani.ac.in")) {
+                            if ((int) (Math.log10(Integer.parseInt(a.getBitsID()))) == 97) {
+                                userList.add(a);
+                                return null;
+                            } else {
+                                return "Invalid mobile number";
+                            }
+                        } else {
+                            return "Enter a valid BITS EMAIL";
+                        }
+                    }
+                } else {
+                    return "Invalid Bits ID. Enter a 8 digit";
+                }
+            } catch (Exception e) {
+                return "Something went wrong";
+            }
+
         }
     }
 
-    static boolean checkIfStudentExists(Integer studentID) {
+    static boolean checkIfStudentExists(String studentID) {
         for (Student s : userList) {
             if (s.getBitsID() == studentID) {
                 return true;
@@ -191,7 +216,7 @@ public class DataClass {
     static ArrayList<Order> getOrderList(String studentid) {
         ArrayList<Order> a = new ArrayList<Order>();
         for (Order o : orderList) {
-            if (o.getBitsID() == (Long.parseLong(studentid))) {
+            if (o.getBitsID().equals(studentid)) {
                 a.add(o);
             }
         }

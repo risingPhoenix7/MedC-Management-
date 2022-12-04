@@ -16,7 +16,7 @@ class Order {
         this.medicineName = medicineName;
     }
 
-    public Order(int bitsID, String medicineName, int orderQuantity, String paymentMethod) {
+    public Order(String bitsID, String medicineName, int orderQuantity, String paymentMethod) {
         this.orderID = UUID.randomUUID();
         this.bitsID = bitsID;
         this.medicineName = medicineName;
@@ -24,17 +24,17 @@ class Order {
         this.paymentMethod = paymentMethod;
     }
 
-    private int bitsID;
+    private String bitsID;
     private UUID orderID;
     private String medicineName;
     private int orderQuantity;
     private String paymentMethod;
 
-    long getBitsID() {
+    String getBitsID() {
         return bitsID;
     }
 
-    void setBitsID(int bitsID) {
+    void setBitsID(String bitsID) {
         this.bitsID = bitsID;
     }
 

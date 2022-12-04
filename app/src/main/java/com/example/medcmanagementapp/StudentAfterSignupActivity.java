@@ -15,6 +15,7 @@ public class StudentAfterSignupActivity extends AppCompatActivity {
     Button createAppointments;
     Button buyMedicines;
     Button seePurchases;
+    Button viewNoticeBoard;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,7 +34,12 @@ public class StudentAfterSignupActivity extends AppCompatActivity {
         createAppointments = findViewById(R.id.button12);
         buyMedicines = findViewById(R.id.button13);
         seePurchases = findViewById(R.id.button14);
-
+        viewNoticeBoard = findViewById(R.id.button18);
+        viewNoticeBoard.setOnClickListener(view -> {
+            Intent appointmentIntent = new Intent(StudentAfterSignupActivity.this, DoctorsListView.class);
+            appointmentIntent.putExtra("Studentid", studentid);
+            startActivity(appointmentIntent);
+        });
         viewAppointments.setOnClickListener(view -> {
             Intent appointmentIntent = new Intent(StudentAfterSignupActivity.this, AppointmentListActivity.class);
             appointmentIntent.putExtra("Studentid", studentid);
