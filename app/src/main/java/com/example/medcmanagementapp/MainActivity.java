@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         studentButton = findViewById(R.id.studentButton);
         medicalShopOwnerButton = findViewById(R.id.medicalShopOwnerButton);
         adminButton.setOnClickListener(view -> {
-            Intent launchActivity1 = new Intent(MainActivity.this, AdminPage.class);
+            Intent launchActivity1 = new Intent(MainActivity.this, PasswordCheckerActivity.class);
             startActivity(launchActivity1);
         });
         medicalShopOwnerButton.setOnClickListener(view -> {
